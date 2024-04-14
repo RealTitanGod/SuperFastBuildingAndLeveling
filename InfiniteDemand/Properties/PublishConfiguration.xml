@@ -1,0 +1,78 @@
+﻿<Publish>
+	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
+	<ModId Value="77321" />
+	<!--Name of the mod to display to players-->
+	<DisplayName Value="Infinite Demand" />
+	<!--Short description of the mod-->
+	<ShortDescription Value="Super fast building and unlimited demand." />
+	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
+	<!--LongDescription Value="This is a long description" /-->
+	<LongDescription>
+# Infinite Demand
+This mod will force buildings to be built almost instantly.
+Additionally, you can enable fast leveling to increase their levels quicker.
+
+This mod also allows you to adjust building demand to your desired level.
+Depending on your simulation speed, the demand sliders may take a while to increase.
+Using the sliders instead of Ultimate Demand may work less efficiently. 
+
+## Notice
+This mod does not fill houses with citizens.
+It will cause rapid building, but they will become abandoned if no one moves in. 
+I recommend using the Abandoned Building Remover Mod in addition to this one to help deal with the abandoned buildings.
+
+## Features
+### Super Fast Build and Ultimate Demand
+The game will build all property types almost instantly. All other demand settings are ignored when this is enabled.
+
+### Fast Leveling
+Enable this to increase the level of the buildings at a faster rate.
+
+### Sliders For Each Property Type
+You can adjust the demand for each property type (Residential, Commerical, Office, and Industrial) individually on a scale of 0-100. 
+
+### Disable Demand Override For Each Property Type
+You turn off the override for each property type (Residential, Commerical, Office, and Industrial) and allow the game to calculate the demand as normal. 
+
+### Reset Settings
+Use the reset button to reset all of the mods settings to default. 
+
+### Compatability and Removal
+You can remove the mod at any time, and your save games should not be affected; the normal demand levels will be restored as determined by the game.
+This mod should not have any compatibility issues with other mods.
+
+### Languages
+For loading languages other than English please utilize I18n Everywhere.
+Thank you to Baka-gourd and the team of translators helping make mods more accessible!
+
+## Contact
+Please use the discussion forum if you have any questions.
+
+	</LongDescription>
+	<!--Thumbnail-->
+	<Thumbnail Value="Properties/Thumbnail.png" />
+	<!--Screenshot, can be set multiple times-->
+	<Screenshot Value="Properties/Thumbnail.png" />
+	<Screenshot Value="Properties/infinitedemand1.png" />
+	<Screenshot Value="Properties/infinitedemand2.png" />
+	<Screenshot Value="Properties/infinitedemand3.png" />
+	<!--Tag, can be set multiple times-->
+	<Tag Value="" />
+	<!--Link to the forum post where the mod can be discussed-->
+	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/infinite-demand-mod.1655966/" />
+	<!--Version of the mod-->
+	<ModVersion Value="1.1.1" />
+	<!--Recommended version of the base game to use the mod-->
+	<GameVersion Value="1.1.*" />
+	<!--Dependency for the mod, can be set multiple times-->
+	<Dependency Id="75426" DisplayName="I18n EveryWhere" Version="1.1.0-snapshot20240411" />
+	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
+	<ChangeLog>
+**v1.1.1**
+- Fixed settings not saving properly in certain cases
+- Added I18n EveryWhere as a Dependency
+
+	</ChangeLog>
+	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
+	<ExternalLink Type="" Url="" />
+</Publish>
