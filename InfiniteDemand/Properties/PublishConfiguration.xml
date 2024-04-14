@@ -74,5 +74,6 @@ Please use the discussion forum if you have any questions.
 
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-	<ExternalLink Type="" Url="" />
+	<ExternalLink Type="github" Url="https://github.com/RealTitanGod/InfiniteDemand" />
+	<ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>
