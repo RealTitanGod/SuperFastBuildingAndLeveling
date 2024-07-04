@@ -23,10 +23,10 @@ namespace InfiniteDemand
     }
 
     // Fast Leveling
-    [HarmonyPatch(typeof(PropertyRenterSystem), "OnUpdate")]
-    public class PropertyRenterSystemmPatch
+    [HarmonyPatch(typeof(BuildingUpkeepSystem), "OnUpdate")]
+    public class BuildingUpkeepSystemPatch
     {
-        static void Prefix(PropertyRenterSystem __instance)
+        static void Prefix(BuildingUpkeepSystem __instance)
         {
             if (InfiniteDemand.m_Setting.EnableSuperFastLeveling)
             {
