@@ -67,8 +67,8 @@ namespace InfiniteDemand
         {
             if (InfiniteDemand.m_Setting.EnableCustomCommercialDemand)
             {
-                CommercialBuildingDemand(__instance).value = InfiniteDemand.m_Setting.CommericalBuildingDemand;
-                // CommercialCompanyDemand(__instance).value = InfiniteDemand.m_Setting.CommericalBuildingDemand; // Company Demand doesn't seem to have much of an effect in game
+                CommercialBuildingDemand(__instance).value = InfiniteDemand.m_Setting.CommercialBuildingDemand;
+                // CommercialCompanyDemand(__instance).value = InfiniteDemand.m_Setting.CommercialBuildingDemand; // Company Demand doesn't seem to have much of an effect in game
             }
         }
     }

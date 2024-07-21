@@ -49,7 +49,7 @@ namespace InfiniteDemand
 
         [SettingsUISlider(min = 0, max = 100, step = 1, scalarMultiplier = 1, unit = Unit.kPercentage)]
         [SettingsUISection(DemandShiftSection, DemandShiftGroup)]
-        public int CommericalBuildingDemand { get; set; }
+        public int CommercialBuildingDemand { get; set; }
 
 
 
@@ -90,7 +90,7 @@ namespace InfiniteDemand
         {
             log.Info($"[{nameof(InfiniteDemand)}] Setting default values.");
             Contra = true;
-            CommericalBuildingDemand = 100;
+            CommercialBuildingDemand = 100;
             IndustrialBuildingDemand = 100;
             OfficeBuildingDemand = 100;
             HomeBuildingDemand = 100;
@@ -137,10 +137,10 @@ namespace InfiniteDemand
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.HomeBuildingDemand)), "Household Building Demand" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.HomeBuildingDemand)), $"Adjust the demand percentage for for Household Buildings" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableCustomCommercialDemand)), "Use Custom Commerical Building Demand" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableCustomCommercialDemand)), "Use Custom Commercial Building Demand" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableCustomCommercialDemand)), $"Turn off to use game calculations." },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.CommericalBuildingDemand)), "Commerical Building Demand" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.CommericalBuildingDemand)), $"Adjust the demand percentage for for Commerical Buildings" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.CommercialBuildingDemand)), "Commercial Building Demand" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.CommercialBuildingDemand)), $"Adjust the demand percentage for for Commercial Buildings" },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableCustomOfficeDemand)), "Use Custom Office Building Demand" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableCustomOfficeDemand)), $"Turn off to use game calculations." },
