@@ -3,15 +3,15 @@ using Unity.Mathematics;
 using Colossal.Collections;
 using HarmonyLib;
 
-namespace InfiniteDemand
+namespace SuperFastBuildingAndLeveling
 {
-    // Super Fast Build & Ultimate Demand
+    // Super Fast Building
     [HarmonyPatch(typeof(ZoneSpawnSystem), "OnUpdate")]
     public class ZoneSpawnSystemPatch
     {
         static void Prefix(ZoneSpawnSystem __instance)
         {
-            if (InfiniteDemand.m_Setting.EnableSuperFastBuild)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastBuild)
             {
                 __instance.debugFastSpawn = true;
             }
@@ -28,7 +28,7 @@ namespace InfiniteDemand
     {
         static void Prefix(BuildingUpkeepSystem __instance)
         {
-            if (InfiniteDemand.m_Setting.EnableSuperFastLeveling)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastLeveling)
             {
                 __instance.debugFastLeveling = true;
             }
@@ -48,10 +48,10 @@ namespace InfiniteDemand
 
         static void Prefix(ResidentialDemandSystem __instance)
         {
-            if (InfiniteDemand.m_Setting.EnableCustomResidentialDemand)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomResidentialDemand)
             {
-                ResidentialBuildingDemand(__instance).value = InfiniteDemand.m_Setting.HomeBuildingDemand;
-                ResidentialHouseholdDemand(__instance).value = InfiniteDemand.m_Setting.HomeBuildingDemand;
+                ResidentialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.HomeBuildingDemand;
+                ResidentialHouseholdDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.HomeBuildingDemand;
             }
         }
     }
@@ -61,14 +61,14 @@ namespace InfiniteDemand
     public class CommercialDemandSystemPatch
     {
         private static AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialBuildingDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_BuildingDemand");
-        private static AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialCompanyDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_CompanyDemand");
+        // private static AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialCompanyDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_CompanyDemand");
 
         static void Prefix(CommercialDemandSystem __instance)
         {
-            if (InfiniteDemand.m_Setting.EnableCustomCommercialDemand)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomCommercialDemand)
             {
-                CommercialBuildingDemand(__instance).value = InfiniteDemand.m_Setting.CommercialBuildingDemand;
-                // CommercialCompanyDemand(__instance).value = InfiniteDemand.m_Setting.CommercialBuildingDemand; // Company Demand doesn't seem to have much of an effect in game
+                CommercialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.CommercialBuildingDemand;
+                // CommercialCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.CommercialBuildingDemand; // Company Demand doesn't seem to have much of an effect in game
             }
         }
     }
@@ -86,17 +86,17 @@ namespace InfiniteDemand
 
         static void Prefix(IndustrialDemandSystem __instance)
         {
-            if (InfiniteDemand.m_Setting.EnableCustomIndustrialDemand)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomIndustrialDemand)
             {
-                IndustrialBuildingDemand(__instance).value = InfiniteDemand.m_Setting.IndustrialBuildingDemand;
-                // IndustrialCompanyDemand(__instance).value = InfiniteDemand.m_Setting.IndustrialBuildingDemand;
-                StorageBuildingDemand(__instance).value = InfiniteDemand.m_Setting.IndustrialBuildingDemand;
-                // StorageCompanyDemand(__instance).value = InfiniteDemand.m_Setting.IndustrialBuildingDemand;
+                IndustrialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
+                // IndustrialCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
+                StorageBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
+                // StorageCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
             }
-            if (InfiniteDemand.m_Setting.EnableCustomOfficeDemand)
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomOfficeDemand)
             {
-                OfficeBuildingDemand(__instance).value = InfiniteDemand.m_Setting.OfficeBuildingDemand;
-                // OfficeCompanyDemand(__instance).value = InfiniteDemand.m_Setting.OfficeBuildingDemand;
+                OfficeBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.OfficeBuildingDemand;
+                // OfficeCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.OfficeBuildingDemand;
             }
         }
     }

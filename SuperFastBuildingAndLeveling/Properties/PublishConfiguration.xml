@@ -1,3 +1,13 @@
+﻿<Publish>
+	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
+	<ModId Value="77321" />
+	<!--Name of the mod to display to players-->
+	<DisplayName Value="Super Fast Building And Leveling" />
+	<!--Short description of the mod-->
+	<ShortDescription Value="Quickly complete building construction and increase building levels." />
+	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
+	<!--LongDescription Value="This is a long description" /-->
+	<LongDescription>
 # Super Fast Building And Leveling (Previously Infinite Demand)
 
 This mod will force buildings to be built almost instantly.
@@ -51,3 +61,36 @@ Thank you to Baka-gourd and the team of translators for helping make mods more a
 ## Contact
 Please use the discussion forum if you have any questions.
 Alternatively, join the Cities Skylines: Modding Discord server for more direct communication.
+
+	</LongDescription>
+	<!--Thumbnail-->
+	<Thumbnail Value="Properties/Thumbnail.png" />
+	<!--Screenshot, can be set multiple times-->
+	<Screenshot Value="Properties/Thumbnail.png" />
+	<Screenshot Value="Properties/sfbal1.png" />
+	<Screenshot Value="Properties/sfbal2.png" />
+	<Screenshot Value="Properties/sfbal3.png" />
+	<Screenshot Value="Properties/sfbal4.png" />
+	<!--Tag, can be set multiple times-->
+	<Tag Value="" />
+	<!--Link to the forum post where the mod can be discussed-->
+	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/super-fast-building-and-leveling-previously-infinite-demand.1655966/" />
+	<!--Version of the mod-->
+	<ModVersion Value="2.0" />
+	<!--Recommended version of the base game to use the mod-->
+	<GameVersion Value="1.1.*" />
+	<!--Dependency for the mod, can be set multiple times-->
+	<Dependency Id="75426" DisplayName="I18n EveryWhere" Version="1.1.0-snapshot20240411" />
+	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
+	<ChangeLog>
+**v2.0**
+- Update for compatibility with patch 1.1.10f1
+- Renamed mod from Infinite Demand to Super Fast Building And Leveling
+- Moved demand override features to Legacy Tab in settings
+- Cleaned up the Settings Menu
+
+	</ChangeLog>
+	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
+	<ExternalLink Type="github" Url="https://github.com/RealTitanGod/SuperFastBuildingAndLeveling" />
+	<ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
+</Publish>
