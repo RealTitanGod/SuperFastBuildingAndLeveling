@@ -15,7 +15,7 @@ Additionally, you can enable fast leveling to increase their levels quicker.
 
 ## Notice
 This mod does not fill houses with citizens.
-It will cause rapid building, but they will become abandoned if no one moves in. 
+It will cause rapid building, but they will become abandoned if no one moves in.
 I recommend using the Abandoned Building Remover Mod in addition to this one to help deal with the abandoned buildings.
 
 ## Features
@@ -26,8 +26,11 @@ The game will almost instantly build all zoned property types, regardless of cur
 This option is disabled by default. Enable this to increase the level of the buildings at a faster rate.
 Enabling this setting may cause the game to stutter depending on your city's size.
 
+### Fast Area-Prop Spawning
+This option is disabled by default. Enable this to increase the speed at which area-props spawn in specialized industry areas. The game supports area-props in vegetable, livestock, stone, coal, ore, and oil industry areas.
+
 ### Reset Settings
-Use the reset button to reset all of the mods settings to default. 
+Use the reset button to reset all of the mods settings to default.
 
 ## How It Works
 This mod utilizes the Super Fast Building and Fast Leveling debug options ordinarily available in developer mode.
@@ -37,16 +40,16 @@ Using Harmony, they are enabled by patching the game's code.
 
 This mod also allows you to control demand for each zone type.
 Depending on your simulation speed, the demand sliders may take a while to increase.
-I could never completely understand how the demand system works and expand on this part of the mod. 
+I could never completely understand how the demand system works and expand on this part of the mod.
 It fills the demand bars and impacts the demand system on a relatively small level.
-I've decided to leave this in the mod for now and rename it to better represent it's main features. 
+I've decided to leave this in the mod for now and rename it to better represent it's main features.
 By disabling it, the game's original demand is restored.
 
 ### Sliders For Each Property Type
-You can adjust the demand for each property type (Residential, Commercial, Office, and Industrial) individually on a scale of 0-100. 
+You can adjust the demand for each property type (Residential, Commercial, Office, and Industrial) individually on a scale of 0-100.
 
 ### Disable Demand Override For Each Property Type
-You can turn off the override for each property type (Residential, Commercial, Office, and Industrial) and allow the game to calculate the demand as normal. 
+You can turn off the override for each property type (Residential, Commercial, Office, and Industrial) and allow the game to calculate the demand as normal.
 
 ## Other Information
 
@@ -76,15 +79,15 @@ Alternatively, join the Cities Skylines: Modding Discord server for more direct 
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/super-fast-building-and-leveling-previously-infinite-demand.1655966/" />
 	<!--Version of the mod-->
-	<ModVersion Value="2.0.3" />
+	<ModVersion Value="2.1" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
-	<Dependency Id="75426" DisplayName="I18n EveryWhere" Version="1.3.2" />
+	<Dependency Id="75426" DisplayName="I18n EveryWhere" Version="1.3.7.1" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog>
-**v2.0.3**
-- Compatibility for game update 1.2.0f1
+**v2.1**
+- Added Fast Area-Prop Spawning
 
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->

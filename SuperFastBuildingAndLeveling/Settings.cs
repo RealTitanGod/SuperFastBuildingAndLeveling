@@ -40,6 +40,8 @@ namespace SuperFastBuildingAndLeveling
         [SettingsUISection(GeneralSettingsTab, GeneralSettingsGroup)]
         public bool EnableSuperFastLeveling { get; set; }
 
+        [SettingsUISection(GeneralSettingsTab, GeneralSettingsGroup)]
+        public bool EnableSuperFastAreaPropSpawning { get; set; }
 
         [SettingsUISection(LegacySettingsTab, ResidentialSettingsGroup)]
         public bool EnableCustomResidentialDemand { get; set; }
@@ -80,7 +82,7 @@ namespace SuperFastBuildingAndLeveling
         public string Mod => "Super Fast Building And Leveling";
 
         [SettingsUISection(InfoTab, InfoGroup)]
-        public string Version => "2.0.3";
+        public string Version => "2.1";
 
         [SettingsUISection(InfoTab, InfoGroup)]
         public string Developer => "TitanGod_";
@@ -115,6 +117,7 @@ namespace SuperFastBuildingAndLeveling
             EnableCustomIndustrialDemand = false;
             EnableSuperFastBuild = true;
             EnableSuperFastLeveling = false;
+            EnableSuperFastAreaPropSpawning = false;
             ApplyAndSave();
         }
 
@@ -149,6 +152,9 @@ namespace SuperFastBuildingAndLeveling
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableSuperFastLeveling)), "Use Fast Leveling" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableSuperFastLeveling)), "All buildings will level up at a quicker rate. Disable to return to regular gameplay building speed. Enabling this setting may cause the game to stutter depending on your city's size." },
+
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableSuperFastAreaPropSpawning)), "Use Fast Area-Prop Spawning" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableSuperFastAreaPropSpawning)), "Specialized industry areas will spawn props at a faster rate (The game supports area-props in vegetable, livestock, stone, coal, ore, & oil industry areas). Disable to return to regular gameplay spawning speed." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableCustomResidentialDemand)), "Use Custom Household Building Demand" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableCustomResidentialDemand)), "Sets the zone's demand level to your selected percentage. Turn off to use game calculations." },

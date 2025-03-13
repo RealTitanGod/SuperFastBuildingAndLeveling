@@ -39,6 +39,23 @@ namespace SuperFastBuildingAndLeveling
         }
     }
 
+    // Fast Area-Prop Spawning
+    [HarmonyPatch(typeof(AreaSpawnSystem), "OnUpdate")]
+    public class AreaSpawnSystemPatch
+    {
+        static void Prefix(AreaSpawnSystem __instance)
+        {
+            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastAreaPropSpawning)
+            {
+                __instance.debugFastSpawn = true;
+            }
+            else
+            {
+                __instance.debugFastSpawn = false;
+            }
+        }
+    }
+
     // Residential Demand
     [HarmonyPatch(typeof(ResidentialDemandSystem), "OnUpdate")]
     public class ResidentialDemandSystemPatch
