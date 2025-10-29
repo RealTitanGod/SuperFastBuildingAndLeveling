@@ -82,7 +82,7 @@ namespace SuperFastBuildingAndLeveling
         public string Mod => "Super Fast Building And Leveling";
 
         [SettingsUISection(InfoTab, InfoGroup)]
-        public string Version => "2.1.1";
+        public string Version => "2.1.2";
 
         [SettingsUISection(InfoTab, InfoGroup)]
         public string Developer => "TitanGod_";
