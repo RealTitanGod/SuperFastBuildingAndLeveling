@@ -13,6 +13,7 @@ namespace SuperFastBuildingAndLeveling
         private Harmony m_Harmony;
         public static ILog log = LogManager.GetLogger($"{nameof(SuperFastBuildingAndLeveling)}.{nameof(SuperFastBuildingAndLeveling)}").SetShowsErrorsInUI(false);
         public static Setting m_Setting;
+        public static bool Ready = false;
 
         public void OnLoad(UpdateSystem updateSystem)
         {
@@ -35,12 +36,14 @@ namespace SuperFastBuildingAndLeveling
             GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
             log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] {nameof(OnLoad)} loaded localization for en-US.");
 
+            Ready = true;
 
         }
 
         public void OnDispose()
         {
             log.Info(nameof(OnDispose));
+            m_Harmony.UnpatchAll();
             if (m_Setting != null)
             {
                 m_Setting.UnregisterInOptionsUI();

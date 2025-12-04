@@ -11,13 +11,14 @@ namespace SuperFastBuildingAndLeveling
     {
         static void Prefix(ZoneSpawnSystem __instance)
         {
-            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastBuild)
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
+            bool target = SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastBuild;
+            if (__instance.debugFastSpawn != target)
             {
-                __instance.debugFastSpawn = true;
-            }
-            else
-            {
-                __instance.debugFastSpawn = false;
+                SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Fast Building update: {__instance.debugFastSpawn} → {target}");
+                __instance.debugFastSpawn = target;
             }
         }
     }
@@ -28,13 +29,14 @@ namespace SuperFastBuildingAndLeveling
     {
         static void Prefix(BuildingUpkeepSystem __instance)
         {
-            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastLeveling)
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
+            bool target = SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastLeveling;
+            if (__instance.debugFastLeveling != target)
             {
-                __instance.debugFastLeveling = true;
-            }
-            else
-            {
-                __instance.debugFastLeveling = false;
+                SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Fast Leveling update: {__instance.debugFastLeveling} → {target}");
+                __instance.debugFastLeveling = target;
             }
         }
     }
@@ -45,13 +47,14 @@ namespace SuperFastBuildingAndLeveling
     {
         static void Prefix(AreaSpawnSystem __instance)
         {
-            if (SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastAreaPropSpawning)
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
+            bool target = SuperFastBuildingAndLeveling.m_Setting.EnableSuperFastAreaPropSpawning;
+            if (__instance.debugFastSpawn != target)
             {
-                __instance.debugFastSpawn = true;
-            }
-            else
-            {
-                __instance.debugFastSpawn = false;
+                SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Fast Area-Prop update: {__instance.debugFastSpawn} → {target}");
+                __instance.debugFastSpawn = target;
             }
         }
     }
@@ -60,15 +63,34 @@ namespace SuperFastBuildingAndLeveling
     [HarmonyPatch(typeof(ResidentialDemandSystem), "OnUpdate")]
     public class ResidentialDemandSystemPatch
     {
-        private static AccessTools.FieldRef<ResidentialDemandSystem, NativeValue<int3>> ResidentialBuildingDemand = AccessTools.FieldRefAccess<ResidentialDemandSystem, NativeValue<int3>>("m_BuildingDemand");
-        private static AccessTools.FieldRef<ResidentialDemandSystem, NativeValue<int>> ResidentialHouseholdDemand = AccessTools.FieldRefAccess<ResidentialDemandSystem, NativeValue<int>>("m_HouseholdDemand");
+        private static readonly AccessTools.FieldRef<ResidentialDemandSystem, NativeValue<int3>> ResidentialBuildingDemand = AccessTools.FieldRefAccess<ResidentialDemandSystem, NativeValue<int3>>("m_BuildingDemand");
+        private static readonly AccessTools.FieldRef<ResidentialDemandSystem, NativeValue<int>> ResidentialHouseholdDemand = AccessTools.FieldRefAccess<ResidentialDemandSystem, NativeValue<int>>("m_HouseholdDemand");
 
         static void Prefix(ResidentialDemandSystem __instance)
         {
-            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomResidentialDemand)
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
+            if (!SuperFastBuildingAndLeveling.m_Setting.EnableCustomResidentialDemand)
+                return;
+
+            int val = SuperFastBuildingAndLeveling.m_Setting.HomeBuildingDemand;
+            int3 target = new int3(val, val, val);
+
+            var building = ResidentialBuildingDemand(__instance);
+            if (!building.value.Equals(target))
             {
-                ResidentialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.HomeBuildingDemand;
-                ResidentialHouseholdDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.HomeBuildingDemand;
+                // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Residential Building Demand update: {building.value} → {target}");
+                building.value = target;
+                ResidentialBuildingDemand(__instance) = building;
+            }
+
+            var household = ResidentialHouseholdDemand(__instance);
+            if (household.value != val)
+            {
+                // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Residential Household Demand update: {household.value} → {val}");
+                household.value = val;
+                ResidentialHouseholdDemand(__instance) = household;
             }
         }
     }
@@ -77,15 +99,25 @@ namespace SuperFastBuildingAndLeveling
     [HarmonyPatch(typeof(CommercialDemandSystem), "OnUpdate")]
     public class CommercialDemandSystemPatch
     {
-        private static AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialBuildingDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_BuildingDemand");
+        private static readonly AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialBuildingDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_BuildingDemand");
         // private static AccessTools.FieldRef<CommercialDemandSystem, NativeValue<int>> CommercialCompanyDemand = AccessTools.FieldRefAccess<CommercialDemandSystem, NativeValue<int>>("m_CompanyDemand");
 
         static void Prefix(CommercialDemandSystem __instance)
         {
-            if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomCommercialDemand)
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
+            if (!SuperFastBuildingAndLeveling.m_Setting.EnableCustomCommercialDemand)
+                return;
+
+            int val = SuperFastBuildingAndLeveling.m_Setting.CommercialBuildingDemand;
+
+            var building = CommercialBuildingDemand(__instance);
+            if (building.value != val)
             {
-                CommercialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.CommercialBuildingDemand;
-                // CommercialCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.CommercialBuildingDemand; // Company Demand doesn't seem to have much of an effect in game
+                // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Commercial Building Demand update: {building.value} → {val}");
+                building.value = val;
+                CommercialBuildingDemand(__instance) = building;
             }
         }
     }
@@ -94,26 +126,50 @@ namespace SuperFastBuildingAndLeveling
     [HarmonyPatch(typeof(IndustrialDemandSystem), "OnUpdate")]
     public class IndustrialDemandSystemPatch
     {
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> IndustrialBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_IndustrialBuildingDemand");
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> IndustrialCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_IndustrialCompanyDemand");
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> StorageBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_StorageBuildingDemand");
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> StorageCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_StorageCompanyDemand");
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> OfficeBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_OfficeBuildingDemand");
-        private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> OfficeCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_OfficeCompanyDemand");
+        private static readonly AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> IndustrialBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_IndustrialBuildingDemand");
+        // private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> IndustrialCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_IndustrialCompanyDemand");
+        private static readonly AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> StorageBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_StorageBuildingDemand");
+        // private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> StorageCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_StorageCompanyDemand");
+        private static readonly AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> OfficeBuildingDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_OfficeBuildingDemand");
+        // private static AccessTools.FieldRef<IndustrialDemandSystem, NativeValue<int>> OfficeCompanyDemand = AccessTools.FieldRefAccess<IndustrialDemandSystem, NativeValue<int>>("m_OfficeCompanyDemand");
 
         static void Prefix(IndustrialDemandSystem __instance)
         {
+            if (!SuperFastBuildingAndLeveling.Ready)
+                return;
+
             if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomIndustrialDemand)
             {
-                IndustrialBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
-                // IndustrialCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
-                StorageBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
-                // StorageCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
+                int val = SuperFastBuildingAndLeveling.m_Setting.IndustrialBuildingDemand;
+
+                var industrial = IndustrialBuildingDemand(__instance);
+                if (industrial.value != val)
+                {
+                    // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Industrial Building Demand update: {industrial.value} → {val}");
+                    industrial.value = val;
+                    IndustrialBuildingDemand(__instance) = industrial;
+                }
+
+                var storage = StorageBuildingDemand(__instance);
+                if (storage.value != val)
+                {
+                    // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Industrial Storage Demand update: {storage.value} → {val}");
+                    storage.value = val;
+                    StorageBuildingDemand(__instance) = storage;
+                }
             }
+
             if (SuperFastBuildingAndLeveling.m_Setting.EnableCustomOfficeDemand)
             {
-                OfficeBuildingDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.OfficeBuildingDemand;
-                // OfficeCompanyDemand(__instance).value = SuperFastBuildingAndLeveling.m_Setting.OfficeBuildingDemand;
+                int val = SuperFastBuildingAndLeveling.m_Setting.OfficeBuildingDemand;
+
+                var office = OfficeBuildingDemand(__instance);
+                if (office.value != val)
+                {
+                    // SuperFastBuildingAndLeveling.log.Info($"[{nameof(SuperFastBuildingAndLeveling)}] Office Building Demand update: {office.value} → {val}");
+                    office.value = val;
+                    OfficeBuildingDemand(__instance) = office;
+                }
             }
         }
     }
